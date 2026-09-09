@@ -1,3 +1,5 @@
+import Lax733996Proofs.BinaryInputCount
+import Lax733996Proofs.BoundedLoop
 import Lax733996Proofs.ChoiceBlocks
 import Lax733996Proofs.ChoiceComposition
 import Lax733996Proofs.ChoiceLanguage
@@ -7,8 +9,17 @@ import Lax733996Proofs.ChoiceRoutines
 import Lax733996Proofs.ChoiceTrees
 import Lax733996Proofs.Complement
 import Lax733996Proofs.Counting
+import Lax733996Proofs.CountingBounds
+import Lax733996Proofs.CountingPrimitives
+import Lax733996Proofs.CountingProgram
+import Lax733996Proofs.CountingQuery
+import Lax733996Proofs.CountingSetup
 import Lax733996Proofs.ExecutionTree
 import Lax733996Proofs.GrowingBinary
+import Lax733996Proofs.GuessWord
+import Lax733996Proofs.GuessWordCorrectness
+import Lax733996Proofs.LogarithmicWidth
 import Lax733996Proofs.NondeterministicStack
 import Lax733996Proofs.StackCompilation
 import Lax733996Proofs.StackMicrocode
+import Lax733996Proofs.StreamingCensus

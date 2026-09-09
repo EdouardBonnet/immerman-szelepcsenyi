@@ -81,6 +81,13 @@ lemma total_loop_rank {w : Word} {bound : ℕ} (test : σ → Bool) (body : Comm
         exact ih (rank e) (by omega) e rfl hie
   exact hr (rank d) d rfl hd
 
+lemma exec_loop_true {w : Word} {bound : ℕ} {test : σ → Bool} {body : Command K Γ σ}
+    {d e : Data K Γ σ} (h : Exec w bound (.loop test body) d e) (ht : test d.state = true) :
+    ∃ f, Exec w bound body d f ∧ Exec w bound (.loop test body) f e := by
+  cases h with
+  | loop_false _ _ _ _ hf => simp [ht] at hf
+  | loop_true _ hb hr => exact ⟨_, hb, hr⟩
+
 lemma exec_loop_invariant {w : Word} {bound : ℕ} {test : σ → Bool} {body : Command K Γ σ}
     (invariant : Data K Γ σ → Prop)
     (hs : ∀ d e, invariant d → test d.state = true → Exec w bound body d e → invariant e)
