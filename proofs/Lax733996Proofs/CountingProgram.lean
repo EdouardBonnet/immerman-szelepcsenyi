@@ -64,51 +64,73 @@ def requireAnswer : Routine M :=
 
 def beginLoop : Routine M := Macro.assign (fun s => {s with flag := false})
 
+def guessSetup (dst : Register) : Routine M :=
+  Macro.clear (SearchProgram.key dst) ⋙ₘ copy M .width .aux
+
 def guess (dst : Register) : Code M :=
-  .det ((Macro.clear (SearchProgram.key dst) ⋙ₘ copy M .width .aux).code) ⋙
+  .det ((guessSetup M dst).code) ⋙
     GuessWord.code (SearchProgram.key .aux) (SearchProgram.key dst) SearchProgram.bit
+
+def pathMove : Routine M :=
+  GraphQuery.procedure M Unit ⋙ₘ requireAnswer M ⋙ₘ copy M .b .a
 
 def pathStep : Code M :=
   .choose (fun s b => {s with flag := b}) ⋙
     .branch (fun s => s.flag)
-      (guess M .b ⋙ .det ((GraphQuery.procedure M Unit ⋙ₘ requireAnswer M ⋙ₘ copy M .b .a).code))
+      (guess M .b ⋙ .det ((pathMove M).code))
       (.det .skip)
 
 /-- Check reachability of the census vertex using at most the current depth.
 A choice to stay pads shorter paths to the fixed number of iterations. -/
+def pathBody : Code M := pathStep M ⋙ .det ((decrement M .kinds).code)
+
+def pathLoop : Code M := .loop (running M) (pathBody M)
+
+def pathSetup : Routine M := fill M .a ⋙ₘ copy M .depth .kinds ⋙ₘ decrement M .kinds
+
+def pathFinish : Routine M := compare M .a .frameMiddle ⋙ₘ requireFlag M
+
 def path : Code M :=
-  .det ((fill M .a ⋙ₘ copy M .depth .kinds ⋙ₘ decrement M .kinds).code) ⋙
-    .loop (running M) (pathStep M ⋙ .det ((decrement M .kinds).code)) ⋙
-    .det ((compare M .a .frameMiddle ⋙ₘ requireFlag M).code)
+  .det ((pathSetup M).code) ⋙ pathLoop M ⋙ .det ((pathFinish M).code)
+
+def censusRecord : Routine M :=
+  copy M .frameMiddle .a ⋙ₘ copy M .frameB .b ⋙ₘ GraphQuery.procedure M Unit ⋙ₘ
+      Macro.assign (fun s => {s with user := {s.user with overflow := s.user.overflow || s.user.answer}}) ⋙ₘ
+      increment M .frameDepth
 
 def censusTake : Code M :=
-  path M ⋙ .branch (valid M)
-    (.det ((copy M .frameMiddle .a ⋙ₘ copy M .frameB .b ⋙ₘ GraphQuery.procedure M Unit ⋙ₘ
-      Macro.assign (fun s => {s with user := {s.user with overflow := s.user.overflow || s.user.answer}}) ⋙ₘ
-      increment M .frameDepth).code))
+  path M ⋙ .branch (valid M) (.det ((censusRecord M).code))
     (.det .skip)
 
-def censusStep : Code M :=
+def censusSelect : Code M :=
   .choose (fun s b => {s with flag := b}) ⋙
-    .branch (fun s => s.flag) (censusTake M) (.det .skip) ⋙
-    .det ((increment M .frameMiddle).code)
+    .branch (fun s => s.flag) (censusTake M) (.det .skip)
+
+def censusStep : Code M := censusSelect M ⋙ .det ((increment M .frameMiddle).code)
 
 /-- Enumerate every candidate in order and count those with a checked path. -/
-def census : Code M :=
-  .det ((fill M .frameMiddle ⋙ₘ fill M .frameDepth (some false) ⋙ₘ fill M .a ⋙ₘ
+def censusSetup : Routine M :=
+  fill M .frameMiddle ⋙ₘ fill M .frameDepth (some false) ⋙ₘ fill M .a ⋙ₘ
     compare M .frameB .a ⋙ₘ
-    Macro.assign (fun s => {s with user := {s.user with overflow := s.flag}}) ⋙ₘ beginLoop M).code) ⋙
-    .loop (running M) (censusStep M) ⋙
-    .det ((compare M .frameDepth .middle ⋙ₘ requireFlag M).code)
+    Macro.assign (fun s => {s with user := {s.user with overflow := s.flag}}) ⋙ₘ beginLoop M
 
-def layerStep : Code M :=
-  census M ⋙
-    .branch (fun s => s.user.overflow) (.det ((increment M .frameA).code)) (.det .skip) ⋙
-    .det ((increment M .frameB).code)
+def censusLoop : Code M := .loop (running M) (censusStep M)
 
-def layer : Code M :=
-  .det ((fill M .frameB ⋙ₘ fill M .frameA (some false) ⋙ₘ beginLoop M).code) ⋙
-    .loop (running M) (layerStep M) ⋙ .det ((copy M .frameA .middle).code)
+def censusFinish : Routine M := compare M .frameDepth .middle ⋙ₘ requireFlag M
+
+def census : Code M :=
+  .det ((censusSetup M).code) ⋙ censusLoop M ⋙ .det ((censusFinish M).code)
+
+def layerRecord : Routine M :=
+  Macro.branch (fun s => s.user.overflow) (increment M .frameA) Macro.skip ⋙ₘ increment M .frameB
+
+def layerStep : Code M := census M ⋙ .det ((layerRecord M).code)
+
+def layerSetup : Routine M := fill M .frameB ⋙ₘ fill M .frameA (some false) ⋙ₘ beginLoop M
+
+def layerLoop : Code M := .loop (running M) (layerStep M)
+
+def layer : Code M := .det ((layerSetup M).code) ⋙ layerLoop M ⋙ .det ((copy M .frameA .middle).code)
 
 def letterWidth : ℕ := FiniteCoding.width (ConfigurationWords.Payload M)
 
@@ -124,8 +146,11 @@ def initializeCode (c : ℕ) : StackRoutines.Code
     (GraphQuery.key .bound) SearchProgram.bit SearchProgram.readBit (SearchProgram.symbol .tally))
     ((expandWidth M c ⋙ₘ fill M .middle (some true) ⋙ₘ fill M .depth ⋙ₘ beginLoop M).code)
 
-def program (c : ℕ) : Code M :=
-  .det (initializeCode M c) ⋙ .loop (running M) (layer M ⋙ .det ((increment M .depth).code))
+def programBody : Code M := layer M ⋙ .det ((increment M .depth).code)
+
+def programLoop : Code M := .loop (running M) (programBody M)
+
+def program (c : ℕ) : Code M := .det (initializeCode M c) ⋙ programLoop M
 
 def initial : Context M := ⟨⟨.call, false, false, GraphQuery.initial M⟩, none, false, .leftEnd, none⟩
 

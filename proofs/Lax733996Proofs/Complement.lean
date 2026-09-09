@@ -38,7 +38,7 @@ The counting machine accepts the complement and preserves a logarithmic space bo
 -/
 lemma complement_closed (A : Language) : A ∈ NL → Aᶜ ∈ NL := by
   rintro ⟨c, hc, M, hdec, hbound⟩
-  obtain ⟨d, D, hd, hD, hb⟩ := CountMachine.implement M c hc
+  obtain ⟨d, D, hd, hD, hb⟩ := CountMachine.implement M c hc hbound
   refine ⟨d, hd, D, ?_, hb⟩
   intro w
   exact ⟨(hD w).1,

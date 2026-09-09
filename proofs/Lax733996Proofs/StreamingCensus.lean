@@ -16,6 +16,17 @@ def Invariant {N : ℕ} (G : Graph N) (a v : Fin N) (k i c : ℕ) (found : Bool)
   ∃ S : Finset (Fin N), S ⊆ visited N i ∧ Census G a k c S ∧
     (found = true ↔ v = a ∨ ∃ u ∈ S, G u v = true)
 
+lemma count_le {N : ℕ} (G : Graph N) (a v : Fin N) (k i c : ℕ) (found : Bool)
+    (h : Invariant G a v k i c found) : c ≤ i := by
+  obtain ⟨S, hs, hc, _⟩ := h
+  let f : {u // u ∈ S} → Fin i := fun u => ⟨u.val.val, by simpa [visited] using hs u.property⟩
+  have hf : Function.Injective f := by
+    intro u v huv
+    apply Subtype.ext
+    apply Fin.ext
+    exact congrArg (fun z : Fin i => z.val) huv
+  simpa [hc.1] using Fintype.card_le_of_injective f hf
+
 lemma initial {N : ℕ} (G : Graph N) (a v : Fin N) (k : ℕ) :
     Invariant G a v k 0 0 (decide (v = a)) := by
   refine ⟨∅, Finset.empty_subset _, ⟨rfl, ?_⟩, ?_⟩ <;> simp
@@ -89,6 +100,13 @@ lemma canonical_final {N : ℕ} (G : Graph N) (a : Fin N) (k : ℕ) :
     layer G a k ∩ visited N N = layer G a k := by
   ext u
   simp [visited, u.isLt]
+
+lemma canonical_card_next {N : ℕ} (G : Graph N) (a : Fin N) (k i : ℕ) (hi : i < N) :
+    (layer G a k ∩ visited N (i + 1)).card =
+      (layer G a k ∩ visited N i).card + if (⟨i, hi⟩ : Fin N) ∈ layer G a k then 1 else 0 := by
+  rw [canonical_next G a k i hi]
+  have hn : (⟨i, hi⟩ : Fin N) ∉ layer G a k ∩ visited N i := by simp [visited]
+  by_cases hh : (⟨i, hi⟩ : Fin N) ∈ layer G a k <;> simp [hh, hn]
 
 end
 
