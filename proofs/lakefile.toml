@@ -28,8 +28,14 @@ subDir = "concepts"
 [[require]]
 name = "Lax307052"
 git = "https://github.com/EdouardBonnet/savitch"
-rev = "14b337efbcb6cda33256536f3296440aff0e13ff"
+rev = "1062714795609fb441d35a663d6d21fa2fba3a72"
 subDir = "concepts"
+
+[[require]]
+name = "Lax307052Proofs"
+git = "https://github.com/EdouardBonnet/savitch"
+rev = "1062714795609fb441d35a663d6d21fa2fba3a72"
+subDir = "proofs"
 
 [[lean_lib]]
 name = "Lax733996Proofs"

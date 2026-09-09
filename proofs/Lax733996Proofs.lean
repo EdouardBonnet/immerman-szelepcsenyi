@@ -1,2 +1,14 @@
+import Lax733996Proofs.ChoiceBlocks
+import Lax733996Proofs.ChoiceComposition
+import Lax733996Proofs.ChoiceLanguage
+import Lax733996Proofs.ChoiceMachine
+import Lax733996Proofs.ChoicePaths
+import Lax733996Proofs.ChoiceRoutines
+import Lax733996Proofs.ChoiceTrees
 import Lax733996Proofs.Complement
 import Lax733996Proofs.Counting
+import Lax733996Proofs.ExecutionTree
+import Lax733996Proofs.GrowingBinary
+import Lax733996Proofs.NondeterministicStack
+import Lax733996Proofs.StackCompilation
+import Lax733996Proofs.StackMicrocode
