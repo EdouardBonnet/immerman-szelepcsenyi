@@ -1,0 +1,1 @@
+The Immerman–Szelepcsényi theorem states that $\mathrm{NL}=\mathrm{coNL}$. We formalize inductive counting on finite directed graphs and use it to certify nonreachability in the configuration graphs of lax-434930. The proof separates census completeness, count propagation, and language complementation. The logarithmic space machine implementation remains an open obligation.
