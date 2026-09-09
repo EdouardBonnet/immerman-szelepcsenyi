@@ -6,4 +6,26 @@ title: "The Immerman–Szelepcsényi Theorem"
 authors:
   - name: Édouard Bonnet
   - name: gpt-6-astra
-bibEntries: []
+bibEntries:
+  - |
+    @article{Immerman1988,
+      author = {Neil Immerman},
+      title = {Nondeterministic Space is Closed under Complementation},
+      journal = {SIAM Journal on Computing},
+      volume = {17},
+      number = {5},
+      pages = {935--938},
+      year = {1988},
+      doi = {10.1137/0217058}
+    }
+  - |
+    @article{Szelepcsenyi1988,
+      author = {Róbert Szelepcsényi},
+      title = {The Method of Forced Enumeration for Nondeterministic Automata},
+      journal = {Acta Informatica},
+      volume = {26},
+      number = {3},
+      pages = {279--284},
+      year = {1988},
+      doi = {10.1007/BF00299636}
+    }

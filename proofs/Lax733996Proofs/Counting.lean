@@ -26,7 +26,7 @@ lemma layer_zero {N : ℕ} (G : Graph N) (a : Fin N) : layer G a 0 = {a} := by
     cases h
     rfl
   · rintro rfl
-    exact ⟨0, le_rfl, Walk.nil a⟩
+    exact ⟨0, le_rfl, Walk.nil _⟩
 
 /--
 ---
@@ -60,7 +60,7 @@ lemma successor_layer {N : ℕ} (G : Graph N) (a v : Fin N) (k : ℕ) :
     | @tail l a u v hp he =>
       exact Or.inr ⟨u, (mem_layer G a u k).mpr ⟨l, by omega, hp⟩, he⟩
   · rintro (rfl | ⟨u, hu, he⟩)
-    · exact ⟨0, Nat.zero_le _, Walk.nil a⟩
+    · exact ⟨0, Nat.zero_le _, Walk.nil _⟩
     · obtain ⟨l, hl, hw⟩ := (mem_layer G a u k).mp hu
       exact ⟨l + 1, by omega, Walk.tail hw he⟩
 
@@ -122,7 +122,7 @@ lemma counting_step {N : ℕ} (G : Graph N) (a : Fin N) (k d : ℕ) :
     refine ⟨fun v => decide (v ∈ layer G a (k + 1)), ?_, ?_⟩
     · intro v
       exact (Classification.correct G a v k _).mpr (by simp)
-    · simp
+    · simp [layer]
 
 /--
 ---
@@ -154,7 +154,8 @@ lemma final_layer {N : ℕ} (G : Graph N) (a b : Fin N) :
     b ∈ layer G a N ↔ Reachable G a b := by
   rw [mem_layer]
   constructor
-  · rintro ⟨k, _, hw⟩
+  · rintro ⟨k, hk, hw⟩
+    clear hk
     induction hw with
     | nil => exact .refl
     | tail _ he ih => exact ih.tail he
