@@ -1,9 +1,11 @@
 import Lax733996Proofs.ChoiceBlocks
 
+set_option backward.isDefEq.respectTransparency false
+
 namespace Lax733996Proofs.ChoiceLanguage
 
 open Lax434930.PolynomialTime Lax434930.SpaceMachines
-open Lax307052Proofs Lax307052Proofs.MachinePaths NondeterministicStack
+open Lax733996Proofs.ConfigurationProofs Lax733996Proofs.ConfigurationProofs.MachinePaths NondeterministicStack
 open scoped Classical
 
 noncomputable section
@@ -112,7 +114,7 @@ lemma embed_runs (B : StackLanguage.Block K Γ σ) (w : Word) (bound : ℕ)
   change (StackMachine.Program.mk (B.entry d.state)
     (fun q i => (embedInstruction (B.code q i)).resolve false)
     (fun q => (B.done q).isSome)).step w c = some f
-  simpa only [resolve_embed] using hf.1
+  simpa only [resolve_embed] using! hf.1
 
 lemma compile_execution [Fintype σ] {w : Word} {bound : ℕ} {c : Command K Γ σ}
     {d e : Data K Γ σ} (h : Exec w bound c d e) : (compile c).Runs w bound d e := by

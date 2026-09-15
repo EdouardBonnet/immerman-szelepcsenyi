@@ -1,12 +1,14 @@
 import Lax733996Proofs.ExecutionTree
-import Lax307052Proofs.StackMachine
+import Lax733996Proofs.ConfigurationProofs.StackMachine
 
 /-! Finite stack programs with a local Boolean choice instruction. -/
+
+set_option backward.isDefEq.respectTransparency false
 
 namespace Lax733996Proofs.NondeterministicStack
 
 open Lax434930.PolynomialTime Lax434930.SpaceMachines
-open Lax307052Proofs Lax307052Proofs.MachinePaths
+open Lax733996Proofs.ConfigurationProofs Lax733996Proofs.ConfigurationProofs.MachinePaths
 open scoped Classical
 
 noncomputable section
@@ -78,9 +80,9 @@ lemma resolved_step (P : Program K Γ Q) (b : Bool) (w : Word)
   obtain ⟨a, ha, rfl⟩ := h
   have hact : StackMachine.action (P.resolve b) c.state (readInput w c.inputHead) (c.tape c.workHead) = some a := by
     cases hh : StackMachine.action (P.resolve b) c.state (readInput w c.inputHead) (c.tape c.workHead) with
-    | none => exact (Finset.notMem_empty a (by simpa only [StackMachine.compile, hh] using ha)).elim
+    | none => exact (Finset.notMem_empty a (by simpa only [StackMachine.compile, hh] using! ha)).elim
     | some x =>
-      have hx : a = x := Finset.mem_singleton.mp (by simpa only [StackMachine.compile, hh] using ha)
+      have hx : a = x := Finset.mem_singleton.mp (by simpa only [StackMachine.compile, hh] using! ha)
       exact congrArg some hx.symm
   exact step_of_action P b w c a hact
 

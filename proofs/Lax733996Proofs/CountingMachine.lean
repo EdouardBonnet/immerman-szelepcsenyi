@@ -2,8 +2,8 @@ import Lax733996Proofs.CountingExecution
 
 namespace Lax733996Proofs.CountingProgram
 
-open Lax434930.PolynomialTime Lax434930.SpaceMachines Lax434930.SpaceBounds Lax307052Proofs
-open Lax307052.Reachability
+open Lax434930.PolynomialTime Lax434930.SpaceMachines Lax434930.SpaceBounds Lax733996Proofs.ConfigurationProofs
+open Lax733996.Reachability
 open scoped Classical
 
 noncomputable section
@@ -23,8 +23,6 @@ lemma machine_spec (M : Machine) (c : ℕ) (hc : 0 < c) (w : Word) :
 ---
 conclusion: Lax733996.CountMachine.implement
 assumptions:
-  - Lax307052.Runs.acceptance
-  - Lax307052.ShortPaths.short_path
   - Lax733996.Nonreachability.correct
 ---
 Compile the sequential path and census loops to a finite Turing machine.

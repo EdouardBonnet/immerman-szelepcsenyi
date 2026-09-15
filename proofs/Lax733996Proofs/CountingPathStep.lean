@@ -1,8 +1,10 @@
 import Lax733996Proofs.CountingGuess
 
+set_option backward.isDefEq.respectTransparency false
+
 namespace Lax733996Proofs.CountingProgram
 
-open Lax434930.PolynomialTime Lax434930.SpaceMachines Lax307052Proofs
+open Lax434930.PolynomialTime Lax434930.SpaceMachines Lax733996Proofs.ConfigurationProofs
 open SearchProgram (Register)
 open StackMacros (Macro)
 open ChoiceLanguage (Exec Total Good)
@@ -22,7 +24,7 @@ lemma pathMove_spec (w : Word) (bound m : ℕ) (d : Data M) (x y : Fin (2 ^ m))
       valid M ((pathMove M).result w d).state =
         (valid M d.state && EncodedGraph.graph M w m x y) := by
   obtain ⟨hg, hp, ho, hk, hq⟩ := CountingQuery.procedure_state M Unit w bound d
-    (BinaryCounter.word m x.val) (BinaryCounter.word m y.val) ha hb (by simp) (by simpa using hm)
+    (BinaryCounter.word m x.val) (BinaryCounter.word m y.val) ha hb (by simp) (by simpa using! hm)
   let dq := (GraphQuery.procedure M Unit).result w d
   let dr := (requireAnswer M).result w dq
   have hc := copy_spec M w bound .b .a (by decide) dr
@@ -30,10 +32,10 @@ lemma pathMove_spec (w : Word) (bound m : ℕ) (d : Data M) (x y : Fin (2 ^ m))
   refine ⟨⟨hg, trivial, hc.1⟩, ?_, ?_, ?_, ?_⟩
   all_goals change _
   all_goals dsimp only [pathMove, Macro.seq]; rw [hc.2]
-  · simpa [reg] using hb'
+  · simpa [reg] using! hb'
   · intro r hr
     simp only [Finset.mem_singleton] at hr
-    simpa [reg, GraphQuery.key, SearchProgram.key, hr] using hk r
+    simpa [reg, GraphQuery.key, SearchProgram.key, hr] using! hk r
   · exact ho
   · change valid M dr.state = _
     rw [requireAnswer_valid]
@@ -126,7 +128,7 @@ lemma pathStep_complete (w : Word) (bound m : ℕ) (d : Data M) (hd : Good w bou
     · exact hfound.trans (congrArg (fun u => u.overflow) hu)
     · exact fun _ => ⟨hv, Or.inr hedge⟩
     · rw [hvalid, hedge]
-      simpa [valid, hu, dc, StackLanguage.assigned] using hv
+      simpa [valid, hu, dc, StackLanguage.assigned] using! hv
 
 end
 

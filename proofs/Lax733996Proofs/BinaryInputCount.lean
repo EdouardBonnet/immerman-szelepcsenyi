@@ -1,10 +1,10 @@
 import Lax733996Proofs.GrowingBinary
-import Lax307052Proofs.InputRoutines
+import Lax733996Proofs.ConfigurationProofs.InputRoutines
 
 namespace Lax733996Proofs.BinaryInputCount
 
 open Lax434930.PolynomialTime Lax434930.SpaceMachines Lax434930.SpaceBounds
-open Lax307052Proofs
+open Lax733996Proofs.ConfigurationProofs
 open StackLanguage (Exec Good assigned moved)
 open StackMacros (Macro)
 open scoped Classical

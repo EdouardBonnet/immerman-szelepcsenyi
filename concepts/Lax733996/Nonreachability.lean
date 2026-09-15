@@ -11,7 +11,7 @@ exactly when the target is unreachable from the source.
 
 namespace Lax733996.Nonreachability
 
-open Lax307052.Reachability Counting
+open Lax733996.Reachability Counting
 
 axiom correct {N : ℕ} (G : Graph N) (a b : Fin N) :
   NonreachCertificate G a b ↔ ¬ Reachable G a b

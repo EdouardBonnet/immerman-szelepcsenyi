@@ -1,10 +1,10 @@
-import Lax307052Proofs.StackMacros
+import Lax733996Proofs.ConfigurationProofs.StackMacros
 import Lax434930.SpaceBounds
 
 namespace Lax733996Proofs.GrowingBinary
 
 open Lax434930.PolynomialTime Lax434930.SpaceMachines
-open Lax307052Proofs Lax307052Proofs.BinaryCounter
+open Lax733996Proofs.ConfigurationProofs Lax733996Proofs.ConfigurationProofs.BinaryCounter
 open scoped Classical
 
 noncomputable section

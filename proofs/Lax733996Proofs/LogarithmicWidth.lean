@@ -5,7 +5,7 @@ import Lax733996Proofs.BinaryInputCount
 namespace Lax733996Proofs.LogarithmicWidth
 
 open Lax434930.PolynomialTime Lax434930.SpaceMachines Lax434930.SpaceBounds
-open Lax307052Proofs
+open Lax733996Proofs.ConfigurationProofs
 open StackLanguage (Exec Good)
 open StackMacros (Macro)
 open scoped Classical

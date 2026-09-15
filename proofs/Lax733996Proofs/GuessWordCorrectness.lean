@@ -3,7 +3,7 @@ import Lax733996Proofs.GuessWord
 namespace Lax733996Proofs.GuessWord
 
 open Lax434930.PolynomialTime Lax434930.SpaceMachines
-open Lax307052Proofs ChoiceLanguage
+open Lax733996Proofs.ConfigurationProofs ChoiceLanguage
 open scoped Classical
 
 noncomputable section

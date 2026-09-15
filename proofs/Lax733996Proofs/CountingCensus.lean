@@ -3,7 +3,7 @@ import Lax733996Proofs.CountingCensusSetup
 
 namespace Lax733996Proofs.CountingProgram
 
-open Lax434930.PolynomialTime Lax434930.SpaceMachines Lax307052Proofs
+open Lax434930.PolynomialTime Lax434930.SpaceMachines Lax733996Proofs.ConfigurationProofs
 open ChoiceLanguage (Exec Total Good)
 open scoped Classical
 

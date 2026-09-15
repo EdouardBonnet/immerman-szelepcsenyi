@@ -3,7 +3,7 @@ import Lax733996.Nonreachability
 import Lax733996.CountMachine
 import Lax733996.ComplementClosure
 import Lax733996.NLcoNL
-import Lax307052.Runs
+import Lax733996Proofs.ConfigurationProofs.Configurations
 import Mathlib.Tactic
 
 namespace Lax733996Proofs
@@ -11,20 +11,19 @@ namespace Lax733996Proofs
 open Lax733996 Lax733996.ConfigurationCounting
 open Lax434930.PolynomialTime Lax434930.SpaceMachines
 open Lax434930.NondeterministicLogarithmicSpace Lax434930.ComplementClasses
-open Lax307052.ConfigurationGraph
+open Lax733996.ConfigurationGraph
 
 /--
 ---
 conclusion: Lax733996.Rejection.correct
 assumptions:
-  - Lax307052.Runs.acceptance
   - Lax733996.Nonreachability.correct
 ---
 Apply the nonreachability certificate to each possible accepting configuration.
 -/
 lemma counting_rejection (M : Machine) (w : Word) (s : ℕ) (hs : M.UsesSpace w s) :
     RejectsByCounting M w s ↔ ¬ M.Accepts w := by
-  rw [← Lax307052.Runs.acceptance M w s hs]
+  rw [← Lax733996Proofs.ConfigurationProofs.configuration_acceptance M w s hs]
   simp only [RejectsByCounting, AcceptsBounded, Nonreachability.correct, not_exists, not_and]
 
 /--

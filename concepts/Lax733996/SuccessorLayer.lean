@@ -11,7 +11,7 @@ an incoming edge from the current layer.
 
 namespace Lax733996.SuccessorLayer
 
-open Lax307052.Reachability Counting
+open Lax733996.Reachability Counting
 
 axiom successor {N : ℕ} (G : Graph N) (a v : Fin N) (k : ℕ) :
   v ∈ layer G a (k + 1) ↔ v = a ∨ ∃ u ∈ layer G a k, G u v = true

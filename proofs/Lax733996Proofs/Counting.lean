@@ -4,12 +4,12 @@ import Lax733996.Classification
 import Lax733996.CountingStep
 import Lax733996.CountingTrace
 import Lax733996.Nonreachability
-import Lax307052.ShortPaths
+import Lax733996Proofs.ConfigurationProofs.ShortPaths
 import Mathlib.Tactic
 
 namespace Lax733996Proofs
 
-open Lax733996 Lax733996.Counting Lax307052.Reachability
+open Lax733996 Lax733996.Counting Lax733996.Reachability
 
 @[simp] lemma mem_layer {N : ℕ} (G : Graph N) (a v : Fin N) (k : ℕ) :
     v ∈ layer G a k ↔ Within (fun u v => G u v = true) k a v := by
@@ -160,14 +160,13 @@ lemma final_layer {N : ℕ} (G : Graph N) (a b : Fin N) :
     | nil => exact .refl
     | tail _ he ih => exact ih.tail he
   · intro hr
-    obtain ⟨k, hk, hw⟩ := (Lax307052.ShortPaths.short_path G a b).mp hr
+    obtain ⟨k, hk, hw⟩ := (Lax733996Proofs.ConfigurationProofs.short_paths G a b).mp hr
     exact ⟨k, Nat.le_of_lt hk, hw⟩
 
 /--
 ---
 conclusion: Lax733996.Nonreachability.correct
 assumptions:
-  - Lax307052.ShortPaths.short_path
   - Lax733996.CountingTrace.correct
   - Lax733996.ExactCensus.complete
 ---

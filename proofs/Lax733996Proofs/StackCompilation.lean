@@ -5,7 +5,7 @@ import Lax733996Proofs.StackMicrocode
 namespace Lax733996Proofs.NondeterministicStack
 
 open Lax434930.PolynomialTime Lax434930.SpaceMachines
-open Lax307052Proofs Lax307052Proofs.MachinePaths
+open Lax733996Proofs.ConfigurationProofs Lax733996Proofs.ConfigurationProofs.MachinePaths
 open scoped Classical
 
 noncomputable section

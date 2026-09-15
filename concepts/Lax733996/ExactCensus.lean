@@ -11,7 +11,7 @@ vertex of the layer. Distinctness is enforced by the finite-set representation.
 
 namespace Lax733996.ExactCensus
 
-open Lax307052.Reachability Counting
+open Lax733996.Reachability Counting
 
 axiom complete {N : ℕ} (G : Graph N) (a : Fin N) (k : ℕ) (S : Finset (Fin N)) :
   Census G a k (layer G a k).card S → S = layer G a k

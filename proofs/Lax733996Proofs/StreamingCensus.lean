@@ -5,7 +5,7 @@ a Boolean recording whether a predecessor has been found. -/
 
 namespace Lax733996Proofs.StreamingCensus
 
-open Lax307052.Reachability Lax733996.Counting
+open Lax733996.Reachability Lax733996.Counting
 open scoped Classical
 
 noncomputable section

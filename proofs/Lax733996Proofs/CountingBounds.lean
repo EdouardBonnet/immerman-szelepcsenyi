@@ -4,7 +4,7 @@ import Lax733996Proofs.Complement
 namespace Lax733996Proofs.CountingProgram
 
 open Lax434930.PolynomialTime Lax434930.SpaceMachines Lax434930.SpaceBounds
-open Lax307052Proofs Lax307052.Reachability
+open Lax733996Proofs.ConfigurationProofs Lax733996.Reachability
 open scoped Classical
 
 noncomputable section

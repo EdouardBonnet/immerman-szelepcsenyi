@@ -1,10 +1,10 @@
 import Lax733996Proofs.ChoiceMachine
-import Lax307052Proofs.StackMacros
+import Lax733996Proofs.ConfigurationProofs.StackMacros
 
 namespace Lax733996Proofs.ChoiceLanguage
 
 open Lax434930.PolynomialTime Lax434930.SpaceMachines
-open Lax307052Proofs
+open Lax733996Proofs.ConfigurationProofs
 open scoped Classical
 
 noncomputable section

@@ -1,11 +1,11 @@
-import Lax307052Proofs.GraphQuery
+import Lax733996Proofs.ConfigurationProofs.GraphQuery
 
 /-! The graph query preserves the counting control and reserved registers. -/
 
 namespace Lax733996Proofs.CountingQuery
 
 open Lax434930.PolynomialTime Lax434930.SpaceMachines
-open Lax307052Proofs Lax307052Proofs.GraphQuery ConfigurationWords
+open Lax733996Proofs.ConfigurationProofs Lax733996Proofs.ConfigurationProofs.GraphQuery ConfigurationWords
 open StackLanguage (Good Exec assigned)
 open StackMacros (Macro)
 open scoped Classical

@@ -2,8 +2,8 @@ import Lax733996Proofs.CountingTake
 
 namespace Lax733996Proofs.CountingProgram
 
-open Lax434930.PolynomialTime Lax434930.SpaceMachines Lax307052Proofs
-open Lax307052.Reachability
+open Lax434930.PolynomialTime Lax434930.SpaceMachines Lax733996Proofs.ConfigurationProofs
+open Lax733996.Reachability
 open ChoiceLanguage (Exec Total Good)
 open scoped Classical
 

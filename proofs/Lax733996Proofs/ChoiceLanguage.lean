@@ -1,5 +1,5 @@
 import Lax733996Proofs.StackCompilation
-import Lax307052Proofs.StackLanguage
+import Lax733996Proofs.ConfigurationProofs.StackLanguage
 
 /-! Structured nondeterministic programs. Deterministic subroutines retain
 their existing semantics; choice changes only the finite control. -/
@@ -7,7 +7,7 @@ their existing semantics; choice changes only the finite control. -/
 namespace Lax733996Proofs.ChoiceLanguage
 
 open Lax434930.PolynomialTime Lax434930.SpaceMachines
-open Lax307052Proofs Lax307052Proofs.MachinePaths
+open Lax733996Proofs.ConfigurationProofs Lax733996Proofs.ConfigurationProofs.MachinePaths
 open scoped Classical
 
 noncomputable section

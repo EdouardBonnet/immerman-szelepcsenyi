@@ -1,4 +1,4 @@
-import Lax307052.ConfigurationGraph
+import Lax733996.ConfigurationGraph
 import Lax733996.Counting
 
 /-!
@@ -14,7 +14,7 @@ the witnesses sequentially; this predicate alone makes no space claim.
 namespace Lax733996.ConfigurationCounting
 
 open Lax434930.PolynomialTime Lax434930.SpaceMachines
-open Lax307052.BoundedConfigurations Lax307052.ConfigurationGraph Counting
+open Lax733996.BoundedConfigurations Lax733996.ConfigurationGraph Counting
 
 def RejectsByCounting (M : Machine) (w : Word) (s : ℕ) : Prop :=
   ∀ a b : Config M w.length s, expand a = M.initial →

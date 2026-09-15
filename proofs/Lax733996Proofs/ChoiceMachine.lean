@@ -5,7 +5,7 @@ import Lax733996Proofs.ChoiceComposition
 namespace Lax733996Proofs.ChoiceLanguage
 
 open Lax434930.PolynomialTime Lax434930.SpaceMachines
-open Lax307052Proofs Lax307052Proofs.MachinePaths NondeterministicStack
+open Lax733996Proofs.ConfigurationProofs Lax733996Proofs.ConfigurationProofs.MachinePaths NondeterministicStack
 open scoped Classical
 
 noncomputable section

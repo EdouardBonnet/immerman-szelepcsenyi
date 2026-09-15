@@ -1,9 +1,11 @@
 import Lax733996Proofs.CountingProgram
 
+set_option backward.isDefEq.respectTransparency false
+
 namespace Lax733996Proofs.CountingProgram
 
 open Lax434930.PolynomialTime Lax434930.SpaceMachines
-open Lax307052Proofs
+open Lax733996Proofs.ConfigurationProofs
 open SearchProgram (Register)
 open StackMacros (Macro)
 open scoped Classical
@@ -93,7 +95,7 @@ lemma decrement_spec (w : Word) (bound k n : ℕ) (hn : n < 2 ^ k) (r : Register
           (SearchProgram.key r) (SearchProgram.word k (if n = 0 then 2 ^ k - 1 else n - 1))⟩ := by
   let dc := (Macro.clear (GraphQuery.key .aux)).result w d
   have hc : dc.store (SearchProgram.key r) = (BinaryCounter.word k n).map SearchProgram.bit := by
-    simpa [dc, Macro.clear, StackRoutines.cleared, GraphQuery.key, SearchProgram.key] using hr
+    simpa [dc, Macro.clear, StackRoutines.cleared, GraphQuery.key, SearchProgram.key] using! hr
   have haux : dc.store (GraphQuery.key .aux) = [] := by simp [dc, Macro.clear, StackRoutines.cleared]
   refine ⟨⟨trivial, ?_⟩, ?_⟩
   · exact BinaryCounter.decrement_guard w bound _ _ (by simp [GraphQuery.key, SearchProgram.key])

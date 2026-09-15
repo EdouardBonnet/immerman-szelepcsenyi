@@ -11,7 +11,7 @@ the size of the next layer. Such classifications exist.
 
 namespace Lax733996.CountingStep
 
-open Lax307052.Reachability Counting
+open Lax733996.Reachability Counting
 
 axiom correct {N : ℕ} (G : Graph N) (a : Fin N) (k d : ℕ) :
   CountStep G a k (layer G a k).card d ↔ d = (layer G a (k + 1)).card

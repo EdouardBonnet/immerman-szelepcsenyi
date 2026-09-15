@@ -1,11 +1,11 @@
-import Lax307052Proofs.MachinePaths
+import Lax733996Proofs.ConfigurationProofs.MachinePaths
 
 /-! Finite computation trees for machines with nondeterministic transitions. -/
 
 namespace Lax733996Proofs
 
 open Lax434930.PolynomialTime Lax434930.SpaceMachines
-open Lax307052Proofs.MachinePaths
+open Lax733996Proofs.ConfigurationProofs.MachinePaths
 open scoped Classical
 
 noncomputable section

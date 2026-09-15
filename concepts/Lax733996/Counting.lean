@@ -1,4 +1,4 @@
-import Lax307052.Reachability
+import Lax733996.Reachability
 import Mathlib.Data.Fintype.Powerset
 
 /-!
@@ -15,7 +15,7 @@ vertex and counts the positive answers.
 
 namespace Lax733996.Counting
 
-open Lax307052.Reachability
+open Lax733996.Reachability
 
 noncomputable def layer {N : ℕ} (G : Graph N) (a : Fin N) (k : ℕ) : Finset (Fin N) := by
   classical

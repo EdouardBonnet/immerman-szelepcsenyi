@@ -2,7 +2,7 @@ import Lax733996Proofs.CountingFrames
 
 namespace Lax733996Proofs.CountingProgram
 
-open Lax434930.PolynomialTime Lax434930.SpaceMachines Lax307052Proofs
+open Lax434930.PolynomialTime Lax434930.SpaceMachines Lax733996Proofs.ConfigurationProofs
 open StackMacros (Macro)
 open scoped Classical
 

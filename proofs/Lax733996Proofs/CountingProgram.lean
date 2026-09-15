@@ -1,8 +1,8 @@
 import Lax733996Proofs.CountingQuery
 import Lax733996Proofs.GuessWordCorrectness
 import Lax733996Proofs.LogarithmicWidth
-import Lax307052Proofs.BinaryDecrement
-import Lax307052Proofs.UnaryExpansion
+import Lax733996Proofs.ConfigurationProofs.BinaryDecrement
+import Lax733996Proofs.ConfigurationProofs.UnaryExpansion
 
 /-! Inductive counting with a fixed set of binary registers. Every guessed
 path and every census is generated sequentially. -/
@@ -10,7 +10,7 @@ path and every census is generated sequentially. -/
 namespace Lax733996Proofs.CountingProgram
 
 open Lax434930.PolynomialTime Lax434930.SpaceMachines
-open Lax307052Proofs
+open Lax733996Proofs.ConfigurationProofs
 open SearchProgram (Register)
 open StackMacros (Macro)
 open scoped Classical

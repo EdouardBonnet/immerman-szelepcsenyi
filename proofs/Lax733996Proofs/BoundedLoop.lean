@@ -6,7 +6,7 @@ successful executions from witnesses for the individual iterations. -/
 namespace Lax733996Proofs.ChoiceLanguage
 
 open Lax434930.PolynomialTime Lax434930.SpaceMachines
-open Lax307052Proofs
+open Lax733996Proofs.ConfigurationProofs
 
 variable {K Γ σ : Type}
 
