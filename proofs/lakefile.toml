@@ -1,5 +1,5 @@
-name = "Lax733996Proofs"
-defaultTargets = ["Lax733996Proofs"]
+name = "Lax362205Proofs"
+defaultTargets = ["Lax362205Proofs"]
 
 [leanOptions]
 autoImplicit = false
@@ -10,7 +10,7 @@ git = "https://github.com/leanprover-community/mathlib4"
 rev = "db584cd6d46c92f209a44c0f1c829460d327499d"
 
 [[require]]
-name = "Lax733996"
+name = "Lax362205"
 path = "../concepts"
 
 [[require]]
@@ -20,4 +20,4 @@ rev = "0c0840319318215fd7b36a9a822b81ce55cf6941"
 subDir = "concepts"
 
 [[lean_lib]]
-name = "Lax733996Proofs"
+name = "Lax362205Proofs"

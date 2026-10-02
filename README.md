@@ -1,6 +1,6 @@
 # The Immerman–Szelepcsényi theorem
 
-Submission [lax-733996](https://laxarchive.org/lax-733996/), proving `NL = coNL` for the machine classes
+Submission [lax-362205](https://laxarchive.org/lax-362205/), proving `NL = coNL` for the machine classes
 of [lax-434930](https://laxarchive.org/lax-434930/). The finite configuration graphs and their correspondence with
 machine runs are included locally, using the checked 4.33.0 sources from that submission.
 

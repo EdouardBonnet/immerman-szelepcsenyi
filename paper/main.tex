@@ -23,185 +23,185 @@ The annotations connect each definition, statement, and proof below to its forma
 \section{Configurations and counting certificates}
 
 \begin{definition}[Bounded reachability]\leavevmode
-% lax begin Lax733996.Reachability
+% lax begin Lax362205.Reachability
 A directed graph on $N$ vertices is given by its Boolean adjacency matrix.
 A walk may repeat vertices. The recursive reachability test divides the
 length bound in two and enumerates possible middle vertices.
 
-% lax end Lax733996.Reachability
+% lax end Lax362205.Reachability
 \end{definition}
 
 \begin{definition}[Bounded machine configurations]\leavevmode
-% lax begin Lax733996.BoundedConfigurations
+% lax begin Lax362205.BoundedConfigurations
 A configuration using at most $s$ work cells consists of a control state,
 an input-head position, a work-head position, and $s$ work symbols.
 Cells beyond this prefix are blank.
 
-% lax end Lax733996.BoundedConfigurations
+% lax end Lax362205.BoundedConfigurations
 \end{definition}
 
 \begin{definition}[The bounded configuration graph]\leavevmode
-% lax begin Lax733996.ConfigurationGraph
+% lax begin Lax362205.ConfigurationGraph
 Vertices are configurations whose work tape has a fixed finite bound.
 Edges are machine transitions. Acceptance is reachability from the initial
 configuration to a terminal accepting configuration. The search predicate
 replaces reachability by the recursive finite graph test.
 
-% lax end Lax733996.ConfigurationGraph
+% lax end Lax362205.ConfigurationGraph
 \end{definition}
 
 \begin{definition}[Inductive counting certificates]\leavevmode
-% lax begin Lax733996.Counting
+% lax begin Lax362205.Counting
 The $k$th reachable layer contains vertices at distance at most $k$ from the
 source. A census lists distinct reachable vertices and their path witnesses.
 Given the correct census size, a negative classification checks that no
 listed vertex has an edge to the target. A counting step classifies every
 vertex and counts the positive answers.
 Write $R_k$ for the vertices reachable from the source $a$ in at most $k$ steps. A census $S$ for count $c$ satisfies $|S|=c$ and $S\subseteq R_k$. A negative classification of $v$ also requires $v\ne a$ and no edge from $S$ to $v$. A trace starts at count one and supplies a valid counting step for each $k<N$. A nonreachability certificate ends with a census omitting the target.
-% lax end Lax733996.Counting
+% lax end Lax362205.Counting
 \end{definition}
 
 \section{Correctness of inductive counting}
 
 \begin{lemma}[Exact censuses enumerate the whole layer]\leavevmode
-% lax begin Lax733996.ExactCensus
+% lax begin Lax362205.ExactCensus
 A census of reachable vertices with the correct cardinality contains every
 vertex of the layer. Distinctness is enforced by the finite-set representation.
 
-% lax end Lax733996.ExactCensus
+% lax end Lax362205.ExactCensus
 \end{lemma}
 \begin{proof}\leavevmode
-% lax begin Lax733996Proofs.exact_census
+% lax begin Lax362205Proofs.exact_census
 Every member of the census belongs to the reachable layer. This inclusion and equality of the two finite cardinalities imply equality of the finite sets.\qedhere
-% lax end Lax733996Proofs.exact_census
+% lax end Lax362205Proofs.exact_census
 \end{proof}
 
 \begin{lemma}[The next reachable layer]\leavevmode
-% lax begin Lax733996.SuccessorLayer
+% lax begin Lax362205.SuccessorLayer
 A vertex belongs to the next layer precisely when it is the source or has
 an incoming edge from the current layer.
 In symbols, $v\in R_{k+1}\Longleftrightarrow v=a\ \text{or}\ \exists u\in R_k,\ G(u,v)=1$.
-% lax end Lax733996.SuccessorLayer
+% lax end Lax362205.SuccessorLayer
 \end{lemma}
 \begin{proof}\leavevmode
-% lax begin Lax733996Proofs.successor_layer
+% lax begin Lax362205Proofs.successor_layer
 A walk of length at most $k+1$ is either the zero-length walk at the source or has a last edge whose prefix has length at most $k$. Conversely, append the indicated edge to a witnessing prefix walk.\qedhere
-% lax end Lax733996Proofs.successor_layer
+% lax end Lax362205Proofs.successor_layer
 \end{proof}
 
 \begin{lemma}[Correctness of vertex classification]\leavevmode
-% lax begin Lax733996.Classification
+% lax begin Lax362205.Classification
 With the correct current count, a vertex has a valid positive or negative
 classification exactly according to its membership in the next layer.
 
-% lax end Lax733996.Classification
+% lax end Lax362205.Classification
 \end{lemma}
 \begin{proof}\leavevmode
-% lax begin Lax733996Proofs.classification
+% lax begin Lax362205Proofs.classification
 A positive classification is precisely a bounded walk into the next layer. For a negative classification, exactness of the census says that all vertices in the current layer have been examined. The successor-layer characterization then shows that the source test and the absence of an incoming edge are precisely nonmembership in the next layer.\qedhere
-% lax end Lax733996Proofs.classification
+% lax end Lax362205Proofs.classification
 \end{proof}
 
 \begin{lemma}[Correctness of one counting step]\leavevmode
-% lax begin Lax733996.CountingStep
+% lax begin Lax362205.CountingStep
 Starting from the correct layer size, valid classifications produce exactly
 the size of the next layer. Such classifications exist.
 
-% lax end Lax733996.CountingStep
+% lax end Lax362205.CountingStep
 \end{lemma}
 \begin{proof}\leavevmode
-% lax begin Lax733996Proofs.counting_step
+% lax begin Lax362205Proofs.counting_step
 Correct classification identifies the vertices marked true with the next reachable layer, so their cardinalities agree. For existence, classify each vertex by its actual membership in that layer and apply the classification equivalence.\qedhere
-% lax end Lax733996Proofs.counting_step
+% lax end Lax362205Proofs.counting_step
 \end{proof}
 
 \begin{lemma}[Correctness of the count sequence]\leavevmode
-% lax begin Lax733996.CountingTrace
+% lax begin Lax362205.CountingTrace
 The initial layer consists of the source. Inductive counting certifies
 exactly the successive layer sizes, including the final size after $N$ steps.
 
-% lax end Lax733996.CountingTrace
+% lax end Lax362205.CountingTrace
 \end{lemma}
 \begin{proof}\leavevmode
-% lax begin Lax733996Proofs.counting_trace
+% lax begin Lax362205Proofs.counting_trace
 The initial layer is the singleton source, so its size is one. Induction using correctness of a counting step identifies every subsequent count. Conversely, the actual layer sizes satisfy the initial condition and each required step.\qedhere
-% lax end Lax733996Proofs.counting_trace
+% lax end Lax362205Proofs.counting_trace
 \end{proof}
 
 \begin{lemma}[Correctness of nonreachability certificates]\leavevmode
-% lax begin Lax733996.Nonreachability
+% lax begin Lax362205.Nonreachability
 A valid sequence of counts and a final census omitting the target exist
 exactly when the target is unreachable from the source.
 
-% lax end Lax733996.Nonreachability
+% lax end Lax362205.Nonreachability
 \end{lemma}
 \begin{proof}\leavevmode
-% lax begin Lax733996Proofs.nonreachability
+% lax begin Lax362205Proofs.nonreachability
 In a graph with $N$ vertices, every reachable target has a walk of length less than $N$. Thus the final layer is the set of all reachable vertices. Correctness of the trace fixes the final count, and an exact final census equals this layer. Such a census omits the target exactly when the target is unreachable.\qedhere
-% lax end Lax733996Proofs.nonreachability
+% lax end Lax362205Proofs.nonreachability
 \end{proof}
 
 \section{The counting machine and complementation}
 
 \begin{definition}[Counting on the configuration graph]\leavevmode
-% lax begin Lax733996.ConfigurationCounting
+% lax begin Lax362205.ConfigurationCounting
 For every terminal accepting configuration, certify that it cannot be
 reached from the initial configuration. The implementation must generate
 the witnesses sequentially; this predicate alone makes no space claim.
 
-% lax end Lax733996.ConfigurationCounting
+% lax end Lax362205.ConfigurationCounting
 \end{definition}
 
 \begin{lemma}[Correctness of rejection by counting]\leavevmode
-% lax begin Lax733996.Rejection
+% lax begin Lax362205.Rejection
 On a space-bounded computation, counting certifies rejection precisely when
 there is no accepting computation.
 
-% lax end Lax733996.Rejection
+% lax end Lax362205.Rejection
 \end{lemma}
 \begin{proof}\leavevmode
-% lax begin Lax733996Proofs.counting_rejection
+% lax begin Lax362205Proofs.counting_rejection
 For runs obeying the space bound, acceptance is equivalent to reachability between the corresponding bounded configurations. Apply nonreachability correctness to every terminal accepting configuration and negate the existential acceptance condition.\qedhere
-% lax end Lax733996Proofs.counting_rejection
+% lax end Lax362205Proofs.counting_rejection
 \end{proof}
 
 \begin{lemma}[Logarithmic space for inductive counting]\leavevmode
-% lax begin Lax733996.CountMachine
+% lax begin Lax362205.CountMachine
 For a machine using logarithmic space, a nondeterministic machine implements
 its configuration counting predicate in logarithmic space. Vertices and
 bounded paths are generated sequentially. Every branch halts.
 More precisely, if $c>0$ and $M$ uses at most $c\,\ell(|w|)$ work cells on every input, there are $d>0$ and a machine $D$ such that, for every $w$, all branches of $D$ halt, $D$ accepts exactly the counting-rejection predicate for $M$ at bound $c\,\ell(|w|)$, and $D$ uses at most $d\,\ell(|w|)$ work cells. Here $\ell$ is the logarithmic bound in the unchanged class definitions.
-% lax end Lax733996.CountMachine
+% lax end Lax362205.CountMachine
 \end{lemma}
 \begin{proof}\leavevmode
-% lax begin Lax733996Proofs.CountingProgram.counting_machine_implementation
+% lax begin Lax362205Proofs.CountingProgram.counting_machine_implementation
 The program first counts the input length in binary and chooses a logarithmic register width. It enumerates possible accepting configurations and uses inductive counting to certify nonreachability. Vertex names, depths, and counts occupy a fixed collection of bounded binary registers; path and census witnesses are generated sequentially. The proved loop invariants establish soundness, existence of an accepting branch for every valid certificate, and termination of all branches. The configuration-graph query is implemented by the checked encoding and stack routines. A verified compiler translates each register operation into the finite Turing-machine model. The bounds cover the input counter, all scratch registers, and compiler microsteps, giving the stated logarithmic work-space bound.\qedhere
-% lax end Lax733996Proofs.CountingProgram.counting_machine_implementation
+% lax end Lax362205Proofs.CountingProgram.counting_machine_implementation
 \end{proof}
 
 \begin{lemma}[Complementing a logarithmic space language]\leavevmode
-% lax begin Lax733996.ComplementClosure
+% lax begin Lax362205.ComplementClosure
 The complement of a language in $\mathrm{NL}$ also belongs to $\mathrm{NL}$.
 
-% lax end Lax733996.ComplementClosure
+% lax end Lax362205.ComplementClosure
 \end{lemma}
 \begin{proof}\leavevmode
-% lax begin Lax733996Proofs.complement_closed
+% lax begin Lax362205Proofs.complement_closed
 Choose the logarithmic-space machine deciding the given language. Its space bound supplies the hypothesis of the counting-machine construction. Rejection correctness identifies the new machine's language with the complement; its termination and space bound give membership in $\mathrm{NL}$.\qedhere
-% lax end Lax733996Proofs.complement_closed
+% lax end Lax362205Proofs.complement_closed
 \end{proof}
 
 \begin{theorem}[The Immerman–Szelepcsényi theorem]\leavevmode
-% lax begin Lax733996.NLcoNL
+% lax begin Lax362205.NLcoNL
 Nondeterministic logarithmic space is closed under complement:
 $\mathrm{NL}=\mathrm{coNL}$.
 
-% lax end Lax733996.NLcoNL
+% lax end Lax362205.NLcoNL
 \end{theorem}
 \begin{proof}\leavevmode
-% lax begin Lax733996Proofs.immerman_szelepcsenyi
+% lax begin Lax362205Proofs.immerman_szelepcsenyi
 By definition, a language belongs to $\mathrm{coNL}$ exactly when its complement belongs to $\mathrm{NL}$. Apply complement closure in both directions and simplify the double complement.\qedhere
-% lax end Lax733996Proofs.immerman_szelepcsenyi
+% lax end Lax362205Proofs.immerman_szelepcsenyi
 \end{proof}
 
 \end{document}
